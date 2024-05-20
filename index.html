@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wave Generator с регуляторами</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="waveCanvas" width="800" height="400"></canvas>
+
+  <div class="controls">
+    <label for="waveHeightRange">Высота волны:</label>
+    <input type="range" id="waveHeightRange" min="0" max="200" value="100">
+
+    <label for="waveLengthRange">Длина волны:</label>
+    <input type="range" id="waveLengthRange" min="0.01" max="0.1" step="0.01" value="0.05">
+
+    <label for="waveSpeedRange">Скорость волны:</label>
+    <input type="range" id="waveSpeedRange" min="0.1" max="1" step="0.1" value="0.5">
+  </div>
+
+  <script>
+    const canvas = document.getElementById('waveCanvas');
+    const context = canvas.getContext('2d');
+
+    const waveHeightRange = document.getElementById('waveHeightRange');
+    const waveLengthRange = document.getElementById('waveLengthRange');
+    const waveSpeedRange = document.getElementById('waveSpeedRange');
+
+    const waveHeight = canvas.height / 2;
+    let waveLength = parseFloat(waveLengthRange.value);
+    let waveSpeed = parseFloat(waveSpeedRange.value);
+    let wavePosition = 0;
+
+    function drawWave() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      context.moveTo(0, canvas.height / 2);
+
+      for (let x = 0; x < canvas.width; x++) {
+        const y = waveHeightRange.value * Math.sin(x * waveLength + wavePosition);
+        context.lineTo(x, canvas.height / 2 + y);
+      }
+
+      context.strokeStyle = '#00ff00';
+      context.stroke();
+      context.closePath();
+    }
+
+    function updateWave() {
+      waveLength = parseFloat(waveLengthRange.value);
+      waveSpeed = parseFloat(waveSpeedRange.value);
+      wavePosition += waveSpeed;
+    }
+
+    function animate() {
+      updateWave();
+      drawWave();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
