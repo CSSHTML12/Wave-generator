@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wave Generator with regulators</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Wave Generator с регуляторами</title>
+ <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="waveCanvas" width="11100" height="400"></canvas>
+  <canvas id="waveCanvas" width="22800" height="400"></canvas>
 
   <div class="controls">
     <label for="waveHeightRange">Wave height:</label>
@@ -16,6 +16,9 @@
 
     <label for="waveSpeedRange">Wave speed:</label>
     <input type="range" id="waveSpeedRange" min="0.1" max="1" step="0.1" value="0.5">
+
+    <label for="waveColorInput">The color of the wave:</label>
+    <input type="color" id="waveColorInput" value="#00ff00">
   </div>
 
   <script>
@@ -25,11 +28,13 @@
     const waveHeightRange = document.getElementById('waveHeightRange');
     const waveLengthRange = document.getElementById('waveLengthRange');
     const waveSpeedRange = document.getElementById('waveSpeedRange');
+    const waveColorInput = document.getElementById('waveColorInput');
 
     const waveHeight = canvas.height / 2;
     let waveLength = parseFloat(waveLengthRange.value);
     let waveSpeed = parseFloat(waveSpeedRange.value);
     let wavePosition = 0;
+    let waveColor = waveColorInput.value;
 
     function drawWave() {
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -41,7 +46,7 @@
         context.lineTo(x, canvas.height / 2 + y);
       }
 
-      context.strokeStyle = '#00ff00';
+      context.strokeStyle = waveColorInput.value;
       context.stroke();
       context.closePath();
     }
@@ -50,6 +55,7 @@
       waveLength = parseFloat(waveLengthRange.value);
       waveSpeed = parseFloat(waveSpeedRange.value);
       wavePosition += waveSpeed;
+      waveColor = waveColorInput.value;
     }
 
     function animate() {
