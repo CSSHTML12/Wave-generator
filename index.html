@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wave Generator с регуляторами</title>
+  <title>Wave Generator with regulators</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="waveCanvas" width="800" height="400"></canvas>
+  <canvas id="waveCanvas" width="11100" height="400"></canvas>
 
   <div class="controls">
-    <label for="waveHeightRange">Высота волны:</label>
+    <label for="waveHeightRange">Wave height:</label>
     <input type="range" id="waveHeightRange" min="0" max="200" value="100">
 
-    <label for="waveLengthRange">Длина волны:</label>
+    <label for="waveLengthRange">Wave length:</label>
     <input type="range" id="waveLengthRange" min="0.01" max="0.1" step="0.01" value="0.05">
 
-    <label for="waveSpeedRange">Скорость волны:</label>
+    <label for="waveSpeedRange">Wave speed:</label>
     <input type="range" id="waveSpeedRange" min="0.1" max="1" step="0.1" value="0.5">
   </div>
 
